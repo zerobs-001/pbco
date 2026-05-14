@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Property Portfolio Gap Analysis — Property Buyers Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── RESET ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #f0f2f5; color: #1a1f2e; -webkit-font-smoothing: antialiased; }
+
+  /* ── PAGE WRAPPER ── */
+  .rp { max-width: 860px; margin: 32px auto; background: #fff; border: 1px solid #e2e6ed; }
+
+  /* ── HEADER ── */
+  .rp-header { background: #205375; padding: 22px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .rp-logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .rp-logo-text .brand { font-size: 15px; font-weight: 800; color: #fff; }
+  .rp-logo-text .domain { font-size: 10px; color: #a8c4d8; margin-top: 1px; }
+  .rp-report-name { font-size: 9px; font-weight: 700; color: #a8c4d8; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 7px; }
+  .rp-header-right { text-align: right; }
+  .rp-client-name { font-size: 16px; font-weight: 700; color: #fff; }
+  .rp-client-detail { font-size: 11px; color: #a8c4d8; margin-top: 2px; }
+  .rp-date { font-size: 10px; color: #6a8fa8; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ── SECTION SCAFFOLDING ── */
+  .sec { padding: 28px 40px 0; }
+  .sec-tag { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #8a93a8; margin-bottom: 5px; }
+  .sec-title { font-size: 22px; font-weight: 800; color: #205375; letter-spacing: -0.4px; }
+  .sec-body { font-size: 12px; color: #4a5266; margin-top: 7px; line-height: 1.65; }
+
+  /* ── SECTION 1: WHAT YOU TOLD US ── */
+  .input-grid { margin: 16px 40px 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #e2e6ed; border: 1px solid #e2e6ed; }
+  .ic { background: #f8fafc; padding: 14px; }
+  .ic.anc { background: #eef4fb; }
+  .ic.der { background: #e6faf4; }
+  .ic-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #8a93a8; margin-bottom: 5px; }
+  .ic-val { font-size: 19px; font-weight: 800; color: #205375; line-height: 1; }
+  .ic-val.grn { color: #0d7c5f; }
+  .ic-sub { font-size: 10px; color: #6b7280; margin-top: 3px; }
+  .badge { display: inline-block; font-size: 7px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 2px 5px; border-radius: 2px; margin-bottom: 5px; }
+  .badge.ab { background: #205375; color: #fff; }
+  .badge.db { background: #0d7c5f; color: #fff; }
+
+  /* ── SECTION 2: GAP TABLE ── */
+  .dim-wrap { margin: 16px 40px 0; border: 1px solid #dde2ea; overflow: hidden; }
+  table.dim { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  table.dim thead th { background: #205375; padding: 11px 14px; text-align: left; border-right: 1px solid rgba(255,255,255,0.12); font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #a8c4d8; }
+  table.dim thead th:first-child { width: 82px; background: #163d57; }
+  td.rl { padding: 13px 14px; font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; border-right: 1px solid #dde2ea; width: 82px; vertical-align: middle; }
+  td.dc { padding: 13px 14px; border-right: 1px solid #dde2ea; vertical-align: top; }
+  td.dc:last-child { border-right: none; }
+  .csub { font-size: 10px; color: #9ca3af; margin-top: 3px; }
+  tr.rt td { background: #fff; border-bottom: 1px solid #dde2ea; }
+  tr.rt td.rl { color: #374151; background: #f8fafc; }
+  .vt { font-size: 19px; font-weight: 800; color: #1e3a5f; line-height: 1; }
+  tr.rg td { background: #fffbf0; border-bottom: 1px solid #dde2ea; }
+  tr.rg td.rl { color: #b45309; background: #fff8e6; }
+  .vg { font-size: 19px; font-weight: 800; color: #b45309; line-height: 1; }
+  tr.rgo td { background: #f0fdf8; }
+  tr.rgo td.rl { color: #0d7c5f; background: #e6faf4; }
+  .vgo { font-size: 19px; font-weight: 800; color: #0d7c5f; line-height: 1; }
+
+  /* ── EQUITY JOURNEY ── */
+  .prog-sec { margin: 18px 40px 0; padding: 16px 20px; background: #f8f9fb; border: 1px solid #e2e6ed; }
+  .prog-title { font-size: 12px; font-weight: 700; color: #205375; margin-bottom: 9px; }
+  .prog-track { height: 9px; background: #e2e8f4; }
+  .prog-fill { height: 100%; background: #205375; transition: width 0.8s ease; }
+  .prog-labels { display: flex; justify-content: space-between; margin-top: 6px; }
+  .pl-s { font-size: 10px; color: #205375; font-weight: 600; }
+  .pl-m { font-size: 10px; color: #9ca3af; font-style: italic; }
+  .pl-e { font-size: 10px; color: #0d7c5f; font-weight: 600; }
+  .prog-pct { font-size: 11px; color: #6b7280; margin-top: 5px; }
+
+  /* ── SECTION 3: INSIGHT CARDS ── */
+  .ins-grid { margin: 16px 40px 0; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: #e2e6ed; border: 1px solid #e2e6ed; }
+  .icard { background: #fff; padding: 18px; }
+  .ilabel { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #8a93a8; margin-bottom: 8px; }
+  .ititle { font-size: 12px; font-weight: 700; color: #1e3a5f; margin-bottom: 13px; line-height: 1.4; }
+  /* Rate bars */
+  .rr { margin-bottom: 9px; }
+  .rbl { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .rbn { font-size: 10px; font-weight: 600; color: #6b7280; }
+  .rbv-need { font-size: 11px; font-weight: 800; color: #b45309; }
+  .rbv-curr { font-size: 11px; font-weight: 800; color: #205375; }
+  .rtrack { height: 7px; background: #f0f2f5; border-radius: 2px; overflow: hidden; }
+  .rfill-need { height: 100%; border-radius: 2px; background: #f97316; }
+  .rfill-curr { height: 100%; border-radius: 2px; background: #205375; }
+  .rgap { margin-top: 11px; background: #fff8e6; border: 1px solid #f59e0b; padding: 8px 10px; border-radius: 3px; }
+  .rgap-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #b45309; }
+  .rgap-val { font-size: 17px; font-weight: 800; color: #b45309; line-height: 1.1; }
+  .rgap-sub { font-size: 10px; color: #9ca3af; margin-top: 1px; }
+  /* Income stack */
+  .istack { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+  .irow-tgt { display: flex; justify-content: space-between; align-items: center; padding: 7px 10px; border-radius: 3px; background: #e6faf4; }
+  .irow-crt { display: flex; justify-content: space-between; align-items: center; padding: 7px 10px; border-radius: 3px; background: #f8fafc; }
+  .irow-ndd { display: flex; justify-content: space-between; align-items: center; padding: 7px 10px; border-radius: 3px; background: #fff8e6; border: 1px solid #f59e0b; }
+  .irow-l { font-size: 10px; font-weight: 600; color: #6b7280; }
+  .irow-v-grn { font-size: 13px; font-weight: 800; color: #0d7c5f; }
+  .irow-v-gry { font-size: 13px; font-weight: 800; color: #374151; }
+  .irow-v-org { font-size: 13px; font-weight: 800; color: #b45309; }
+  .iformula { font-size: 10px; color: #9ca3af; line-height: 1.5; }
+  /* Readiness */
+  .sbadge-nr { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; padding: 4px 8px; border-radius: 3px; background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; margin-bottom: 12px; }
+  .sbadge-ok { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; padding: 4px 8px; border-radius: 3px; background: #e6faf4; color: #0d7c5f; border: 1px solid #6ee7b7; margin-bottom: 12px; }
+  .rrows { display: flex; flex-direction: column; gap: 5px; }
+  .rrow-cap { display: flex; justify-content: space-between; padding: 7px 10px; border-radius: 3px; background: #eef4fb; }
+  .rrow-req { display: flex; justify-content: space-between; padding: 7px 10px; border-radius: 3px; background: #f8fafc; }
+  .rrow-sfl { display: flex; justify-content: space-between; padding: 7px 10px; border-radius: 3px; background: #fff5f5; }
+  .rrow-l { font-size: 10px; font-weight: 600; color: #6b7280; }
+  .rrow-v-bl { font-size: 13px; font-weight: 800; color: #205375; }
+  .rrow-v-dk { font-size: 13px; font-weight: 800; color: #374151; }
+  .rrow-v-rd { font-size: 13px; font-weight: 800; color: #b91c1c; }
+  .rrow-v-grn { font-size: 13px; font-weight: 800; color: #0d7c5f; }
+  .cap-track { height: 7px; background: #f0f2f5; border-radius: 2px; overflow: hidden; margin-top: 9px; }
+  .cap-fill { height: 100%; background: #205375; border-radius: 2px; }
+  .cap-lbl { display: flex; justify-content: space-between; margin-top: 4px; }
+  .cll { font-size: 10px; color: #205375; font-weight: 600; }
+  .clr { font-size: 10px; color: #9ca3af; }
+
+  /* ── COST OF DELAY ── */
+  .dly-sec { padding: 28px 40px 0; }
+  .dtbl { width: 100%; border: 1px solid #e2e6ed; border-collapse: collapse; margin-top: 16px; }
+  .dtbl thead th { padding: 9px 14px; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-align: left; }
+  .th-m { background: #f8f9fb; color: #6b7280; width: 36%; }
+  .th-n { background: #eef4fb; color: #205375; width: 32%; }
+  .th-d { background: #fff5f5; color: #b91c1c; width: 32%; }
+  .dtbl tbody td { padding: 10px 14px; font-size: 12px; border-top: 1px solid #e2e6ed; vertical-align: top; }
+  .dtbl tbody tr:nth-child(even) td { background: #fafbfc; }
+  .td-m { color: #374151; font-weight: 500; font-size: 11px; }
+  .td-n { color: #205375; font-weight: 700; }
+  .td-d { color: #b91c1c; font-weight: 700; }
+  .td-s { font-size: 10px; color: #9ca3af; font-weight: 400; display: block; margin-top: 1px; }
+
+  /* ── CLOSING THE GAP ── */
+  .q-sec { padding: 28px 40px 0; }
+  .qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #e2e6ed; border: 1px solid #e2e6ed; margin-top: 16px; }
+  .qi { background: #fff; padding: 13px 15px; display: flex; gap: 10px; }
+  .qnum { width: 20px; height: 20px; min-width: 20px; background: #fef3c7; border: 1px solid #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 800; color: #92400e; flex-shrink: 0; }
+  .qtxt { font-size: 11px; color: #374151; line-height: 1.5; font-weight: 500; }
+  .qtag { display: block; font-size: 9px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #9ca3af; margin-top: 3px; }
+
+  /* ── FOOTER ── */
+  .rp-footer { margin: 28px 40px 0; padding: 14px 0 26px; border-top: 1px solid #e2e6ed; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+  .footer-disc { font-size: 9px; color: #9ca3af; line-height: 1.65; }
+  .footer-brand { text-align: right; min-width: 110px; flex-shrink: 0; font-size: 10px; font-weight: 700; color: #205375; }
+
+  /* ── CTA STRIP ── */
+  .cta-strip { background: #205375; padding: 26px 40px; display: flex; justify-content: space-between; align-items: center; gap: 32px; }
+  .cta-ey { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #a8c4d8; margin-bottom: 5px; }
+  .cta-txt { font-size: 17px; font-weight: 800; color: #fff; letter-spacing: -0.3px; line-height: 1.3; }
+  .cta-sub { font-size: 11px; color: #a8c4d8; margin-top: 6px; line-height: 1.65; }
+  .cta-btn { display: inline-block; background-color: #F66B0E; color: #fff; font-size: 13px; font-weight: 800; padding: 14px 24px; border: none; cursor: pointer; border-radius: 4px; white-space: nowrap; letter-spacing: 0.2px; flex-shrink: 0; text-decoration: none; font-family: 'Inter', sans-serif; }
+  .cta-btn:hover { background-color: #e05e0a; }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff; }
+    .rp { margin: 0; border: none; }
+    .cta-strip { display: none; }
+    .rp-footer { border-top: 1px solid #ccc; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 680px) {
+    .rp { margin: 0; border: none; }
+    .rp-header, .sec, .dly-sec, .q-sec, .rp-footer, .cta-strip { padding-left: 20px; padding-right: 20px; }
+    .input-grid, .dim-wrap, .prog-sec, .ins-grid { margin-left: 20px; margin-right: 20px; }
+    .input-grid { grid-template-columns: 1fr 1fr; }
+    .ins-grid { grid-template-columns: 1fr; }
+    .qgrid { grid-template-columns: 1fr; }
+    table.dim { font-size: 11px; }
+    .cta-strip { flex-direction: column; align-items: flex-start; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="rp" id="report">
+
+  <!-- HEADER -->
+  <div class="rp-header">
+    <div>
+      <div class="rp-logo-wrap">
+        <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="6" fill="rgba(255,255,255,0.15)"/><path d="M16 7L5 16h3.5v9h7v-5.5h1V25h7v-9H27L16 7z" fill="white"/></svg>
+        <div class="rp-logo-text"><div class="brand">Property Buyers Co.</div><div class="domain">pbco.com.au</div></div>
+      </div>
+      <div class="rp-report-name">Property Portfolio Gap Analysis</div>
+    </div>
+    <div class="rp-header-right">
+      <div class="rp-client-name" id="r-name"></div>
+      <div class="rp-client-detail" id="r-detail"></div>
+      <div class="rp-date" id="r-date"></div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: WHAT YOU TOLD US -->
+  <div class="sec">
+    <div class="sec-tag">Section 1 of 4 — Your position today</div>
+    <div class="sec-title">What you told us</div>
+    <div class="sec-body">Your portfolio details and goal anchors. Everything in this report is calculated from these figures.</div>
+  </div>
+  <div class="input-grid">
+    <div class="ic"><div class="ic-label">Net equity</div><div class="ic-val" id="r-ne"></div><div class="ic-sub">Investment properties</div></div>
+    <div class="ic"><div class="ic-label">Properties owned</div><div class="ic-val" id="r-po"></div><div class="ic-sub">Investment properties</div></div>
+    <div class="ic"><div class="ic-label">Net rental income</div><div class="ic-val" id="r-nr"></div><div class="ic-sub">Per month, after expenses</div></div>
+    <div class="ic"><div class="ic-label">Available capital</div><div class="ic-val" id="r-ac"></div><div class="ic-sub">Savings and accessible equity</div></div>
+  </div>
+  <div class="input-grid" style="margin-top:1px;">
+    <div class="ic anc"><div class="badge ab">Anchor</div><div class="ic-label">Household income</div><div class="ic-val" id="r-hi"></div><div class="ic-sub">After-tax, per month</div></div>
+    <div class="ic anc"><div class="badge ab">Anchor</div><div class="ic-label">Income to replace</div><div class="ic-val" id="r-rp"></div><div class="ic-sub">Of household income</div></div>
+    <div class="ic der"><div class="badge db">Calculated</div><div class="ic-label">Target passive income</div><div class="ic-val grn" id="r-tmi"></div><div class="ic-sub">Per month, after tax</div></div>
+    <div class="ic anc"><div class="badge ab">Anchor</div><div class="ic-label">Target age</div><div class="ic-val" id="r-ta"></div><div class="ic-sub" id="r-years-away"></div></div>
+  </div>
+
+  <!-- SECTION 2: THE GAP -->
+  <div class="sec" style="margin-top:28px;">
+    <div class="sec-tag">Section 2 of 4 — The gap</div>
+    <div class="sec-title">The Gap you need to close</div>
+    <div class="sec-body">Four dimensions. Each one measures the distance between where you are today and where you want to be.</div>
+  </div>
+  <div class="dim-wrap">
+    <table class="dim">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Equity Gap</th>
+          <th>Time to Destination</th>
+          <th>Acquisitions Required</th>
+          <th>Income Replacement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="rt">
+          <td class="rl">Today</td>
+          <td class="dc"><div class="vt" id="d-ne-today"></div><div class="csub">Net portfolio equity</div></td>
+          <td class="dc"><div class="vt" id="d-time-today"></div><div class="csub">Current trajectory arrival</div></td>
+          <td class="dc"><div class="vt" id="d-acq-today"></div><div class="csub">Properties owned</div></td>
+          <td class="dc"><div class="vt" id="d-inc-today"></div><div class="csub">Of target income replaced</div></td>
+        </tr>
+        <tr class="rg">
+          <td class="rl">Gap</td>
+          <td class="dc"><div class="vg" id="d-ne-gap"></div><div class="csub">Equity still to build</div></td>
+          <td class="dc"><div class="vg" id="d-time-gap"></div><div class="csub">Past your target age</div></td>
+          <td class="dc"><div class="vg" id="d-acq-gap"></div><div class="csub">Properties still needed</div></td>
+          <td class="dc"><div class="vg" id="d-inc-gap"></div><div class="csub">Still to achieve</div></td>
+        </tr>
+        <tr class="rgo">
+          <td class="rl">Your Goal</td>
+          <td class="dc"><div class="vgo" id="d-ne-goal"></div><div class="csub">Required equity</div></td>
+          <td class="dc"><div class="vgo" id="d-time-goal"></div><div class="csub">Your target</div></td>
+          <td class="dc"><div class="vgo" id="d-acq-goal"></div><div class="csub">Total portfolio size</div></td>
+          <td class="dc"><div class="vgo" id="d-inc-goal"></div><div class="csub" id="d-inc-goal-sub"></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EQUITY JOURNEY -->
+  <div class="prog-sec">
+    <div class="prog-title">Equity Journey</div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    <div class="prog-labels">
+      <div class="pl-s" id="prog-start"></div>
+      <div class="pl-m" id="prog-mid"></div>
+      <div class="pl-e" id="prog-end"></div>
+    </div>
+    <div class="prog-pct" id="prog-pct"></div>
+  </div>
+
+  <!-- SECTION 3: READING THE GAP -->
+  <div class="sec" style="margin-top:28px;">
+    <div class="sec-tag">Section 3 of 4 — What the numbers mean</div>
+    <div class="sec-title">Reading the gap</div>
+    <div class="sec-body">Three derived insights from your position. These tell you what the gap requires in practice.</div>
+  </div>
+  <div class="ins-grid">
+
+    <!-- Card 1: Equity build rate -->
+    <div class="icard">
+      <div class="ilabel">Equity build rate</div>
+      <div class="ititle">How fast you need to build versus how fast you are building</div>
+      <div class="rr">
+        <div class="rbl"><div class="rbn">Needed per year</div><div class="rbv-need" id="i-need-yr"></div></div>
+        <div class="rtrack"><div class="rfill-need" style="width:100%"></div></div>
+      </div>
+      <div class="rr">
+        <div class="rbl"><div class="rbn">Current pace</div><div class="rbv-curr" id="i-curr-yr"></div></div>
+        <div class="rtrack"><div class="rfill-curr" id="i-curr-bar" style="width:0%"></div></div>
+      </div>
+      <div class="rgap">
+        <div class="rgap-label">Shortfall per year</div>
+        <div class="rgap-val" id="i-shortfall"></div>
+        <div class="rgap-sub">The gap each new acquisition needs to close</div>
+      </div>
+    </div>
+
+    <!-- Card 2: Income per property -->
+    <div class="icard">
+      <div class="ilabel">Income per property</div>
+      <div class="ititle">What each acquisition in your portfolio needs to deliver</div>
+      <div class="istack">
+        <div class="irow-tgt"><div class="irow-l">Target passive income</div><div class="irow-v-grn" id="i-tgt-inc"></div></div>
+        <div class="irow-crt"><div class="irow-l">Currently generating</div><div class="irow-v-gry" id="i-curr-inc"></div></div>
+        <div class="irow-ndd"><div class="irow-l">Each new property needs to deliver</div><div class="irow-v-org" id="i-per-prop"></div></div>
+      </div>
+      <div class="iformula">Net rent per property, after expenses. Based on your target and acquisition gap.</div>
+    </div>
+
+    <!-- Card 3: Readiness -->
+    <div class="icard">
+      <div class="ilabel">Next acquisition readiness</div>
+      <div class="ititle">Can you move on the next property today?</div>
+      <div id="i-ready-badge"></div>
+      <div class="rrows">
+        <div class="rrow-cap"><div class="rrow-l">Available capital</div><div class="rrow-v-bl" id="i-cap-avail"></div></div>
+        <div class="rrow-req"><div class="rrow-l">Deposit and costs required</div><div class="rrow-v-dk" id="i-cap-req"></div></div>
+        <div id="i-shortfall-row"></div>
+      </div>
+      <div class="cap-track"><div class="cap-fill" id="i-cap-fill" style="width:0%"></div></div>
+      <div class="cap-lbl"><div class="cll" id="i-cap-lbl-s"></div><div class="clr" id="i-cap-lbl-e"></div></div>
+    </div>
+
+  </div>
+
+  <!-- COST OF DELAY -->
+  <div class="dly-sec">
+    <div class="sec-tag" style="margin-bottom:5px;">Cost of waiting</div>
+    <div class="sec-title">Cost of Delay</div>
+    <div class="sec-body">What waiting 24 months means for your position. Based on a 6% annual growth assumption, labelled indicative.</div>
+    <table class="dtbl">
+      <thead>
+        <tr>
+          <th class="th-m">Metric</th>
+          <th class="th-n">Act now</th>
+          <th class="th-d">Wait 24 months</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-m">Entry price on next acquisition<span class="td-s">6% annual growth assumption, indicative</span></td>
+          <td class="td-n" id="cod-price-now"></td>
+          <td class="td-d" id="cod-price-wait"></td>
+        </tr>
+        <tr>
+          <td class="td-m">Deposit and costs required<span class="td-s">20% deposit plus approx. 4.5% purchase costs</span></td>
+          <td class="td-n" id="cod-dep-now"></td>
+          <td class="td-d" id="cod-dep-wait"></td>
+        </tr>
+        <tr>
+          <td class="td-m">Age you reach your target<span class="td-s">Based on current trajectory, base scenario</span></td>
+          <td class="td-n" id="cod-age-now"></td>
+          <td class="td-d" id="cod-age-wait"></td>
+        </tr>
+        <tr>
+          <td class="td-m">Foregone equity growth<span class="td-s">Growth on next property over 24 months</span></td>
+          <td class="td-n">Not applicable</td>
+          <td class="td-d" id="cod-foregone"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CLOSING THE GAP -->
+  <div class="q-sec">
+    <div class="sec-tag" style="margin-bottom:5px;">Section 4 of 4 — Inside the gap</div>
+    <div class="sec-title">Closing the Gap</div>
+    <div class="sec-body">6 decisions that determine how you close the gap</div>
+    <div class="qgrid">
+      <div class="qi"><div class="qnum">1</div><div><div class="qtxt">What do you buy first, and does it actually fit your 25-year sequence?</div><div class="qtag">Strategy · Sequencing</div></div></div>
+      <div class="qi"><div class="qnum">2</div><div><div class="qtxt">How does your borrowing capacity change as the portfolio grows, and where does it hit a ceiling?</div><div class="qtag">Finance · Serviceability</div></div></div>
+      <div class="qi"><div class="qnum">3</div><div><div class="qtxt">Should you hold in personal name, a trust, or an SMSF, and does your current structure need to change before you acquire again?</div><div class="qtag">Structure · Tax</div></div></div>
+      <div class="qi"><div class="qnum">4</div><div><div class="qtxt">How do you manage cashflow across a growing portfolio while maintaining lifestyle?</div><div class="qtag">Cashflow · Risk</div></div></div>
+      <div class="qi"><div class="qnum">5</div><div><div class="qtxt">Growth or yield first, and at what point does the balance shift?</div><div class="qtag">Strategy · Allocation</div></div></div>
+      <div class="qi"><div class="qnum">6</div><div><div class="qtxt">What are your first 90 days: specific actions, in the right order, to begin closing the gap?</div><div class="qtag">Execution · Roadmap</div></div></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="rp-footer">
+    <div class="footer-disc">This is general information and not financial advice. Results are hypothetical and depend on the assumptions you enter. Property values, growth rates, and income projections are indicative only and do not represent a guarantee of outcomes.</div>
+    <div class="footer-brand">Property Buyers Co.<br>pbco.com.au</div>
+  </div>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div style="flex:1;">
+      <div class="cta-ey">Your next step</div>
+      <div class="cta-txt">The 6 questions have answers.</div>
+      <div class="cta-sub">A free 30-minute Position Review Call reviews your gap and gives you high-level direction on the 6 questions — which ones apply to your situation, where the real leverage is, and what to prioritise first. No obligation.</div>
+    </div>
+    <a href="https://pbco.com.au/position-review-call" class="cta-btn">Book Position Review Call</a>
+  </div>
+
+</div><!-- /rp -->
+
+<script>
+(function () {
+
+  // ── HELPERS ──────────────────────────────────────────────────────────────
+  function $id(id) { return document.getElementById(id); }
+
+  function fmtCurrency(n) {
+    if (n === null || n === undefined || isNaN(n)) return '$0';
+    n = Math.round(n);
+    if (Math.abs(n) >= 1000000) return '$' + (n / 1000000).toFixed(2).replace(/\.?0+$/, '') + 'M';
+    if (Math.abs(n) >= 1000) return '$' + Math.round(n / 1000) + 'k';
+    return '$' + n.toLocaleString();
+  }
+
+  function fmtCurrencyFull(n) {
+    if (isNaN(n)) return '$0';
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  function fmtPct(n) {
+    return Math.round(n) + '%';
+  }
+
+  function clamp(val, min, max) {
+    return Math.min(max, Math.max(min, val));
+  }
+
+  // ── READ PARAMS ──────────────────────────────────────────────────────────
+  var params = new URLSearchParams(window.location.search);
+  var d = {};
+
+  if (params.get('data')) {
+    try {
+      d = JSON.parse(atob(params.get('data')));
+    } catch (e) {
+      d = {};
+    }
+  } else {
+    d = {
+      ne:  parseFloat(params.get('ne'))  || 0,
+      po:  parseInt(params.get('po'))    || 0,
+      nr:  parseFloat(params.get('nr'))  || 0,
+      ac:  parseFloat(params.get('ac'))  || 0,
+      hi:  parseFloat(params.get('hi'))  || 0,
+      age: parseInt(params.get('age'))   || 30,
+      dep: parseInt(params.get('dep'))   || 0,
+      rp:  parseFloat(params.get('rp'))  || 90,
+      ta:  parseInt(params.get('ta'))    || 55,
+      fn:  params.get('fn')              || 'Your',
+      em:  params.get('em')              || ''
+    };
+    // Encode and update URL for permanent link
+    try {
+      var encoded = btoa(JSON.stringify(d));
+      history.replaceState(null, '', '?data=' + encoded);
+    } catch(e) {}
+  }
+
+  // ── CONSTANTS ────────────────────────────────────────────────────────────
+  var GROWTH         = 0.06;
+  var YIELD          = 0.04;
+  var ASSUMED_ENTRY  = 750000;
+  var DEP_COSTS_RATE = 0.245;  // 20% deposit + 4.5% costs
+
+  // ── CALCULATIONS ─────────────────────────────────────────────────────────
+
+  // Target monthly income
+  var target_monthly = d.hi * (d.rp / 100);
+
+  // Required portfolio equity
+  var required_equity = (target_monthly * 12) / YIELD;
+
+  // Equity gap
+  var equity_gap = Math.max(0, required_equity - d.ne);
+
+  // Years to target
+  var years_to_target = Math.max(1, d.ta - d.age);
+
+  // Current arrival age (log formula)
+  var current_arrival_age;
+  if (d.ne <= 0 || required_equity <= 0) {
+    current_arrival_age = d.ta + 20;
+  } else if (d.ne >= required_equity) {
+    current_arrival_age = d.age;
+  } else {
+    var yrs = Math.log(required_equity / d.ne) / Math.log(1 + GROWTH);
+    current_arrival_age = Math.round(d.age + yrs);
+  }
+  var time_gap = Math.max(0, current_arrival_age - d.ta);
+
+  // Acquisition gap
+  var avg_equity_per_prop = d.po > 0 ? d.ne / d.po : 240000;
+  var properties_needed   = required_equity / avg_equity_per_prop;
+  var acq_gap_low  = Math.max(0, Math.ceil(properties_needed - d.po));
+  var acq_gap_high = acq_gap_low + 1;
+  var total_low    = d.po + acq_gap_low;
+  var total_high   = d.po + acq_gap_high;
+
+  // Income replacement
+  var inc_rep_current = target_monthly > 0 ? (d.nr / target_monthly) * 100 : 0;
+  inc_rep_current = Math.min(inc_rep_current, d.rp);
+  var inc_rep_gap  = Math.max(0, d.rp - inc_rep_current);
+
+  // Progress bar
+  var progress_pct = required_equity > 0 ? clamp((d.ne / required_equity) * 100, 0.5, 99) : 0;
+
+  // Equity build rate
+  var equity_needed_per_yr = equity_gap / years_to_target;
+  var current_equity_pace  = d.ne * GROWTH;
+  var equity_shortfall_yr  = Math.max(0, equity_needed_per_yr - current_equity_pace);
+  var curr_bar_pct         = equity_needed_per_yr > 0 ? clamp((current_equity_pace / equity_needed_per_yr) * 100, 2, 98) : 0;
+
+  // Income per property (use midpoint of acquisition gap range)
+  var acq_midpoint        = acq_gap_low + 0.5;
+  var income_per_prop     = acq_midpoint > 0 ? (target_monthly - d.nr) / acq_midpoint : 0;
+
+  // Readiness
+  var deposit_req      = ASSUMED_ENTRY * DEP_COSTS_RATE;
+  var capital_shortfall = deposit_req - d.ac;
+  var is_ready         = d.ac >= deposit_req;
+  var cap_pct          = clamp((d.ac / deposit_req) * 100, 2, 100);
+
+  // Cost of delay
+  var entry_wait      = Math.round(ASSUMED_ENTRY * Math.pow(1 + GROWTH, 2));
+  var dep_now         = Math.round(ASSUMED_ENTRY * DEP_COSTS_RATE);
+  var dep_wait        = Math.round(entry_wait * DEP_COSTS_RATE);
+  var age_wait        = current_arrival_age + 2;
+  var foregone_equity = Math.round(ASSUMED_ENTRY * (Math.pow(1 + GROWTH, 2) - 1));
+  var dep_delta       = dep_wait - dep_now;
+  var entry_delta     = entry_wait - ASSUMED_ENTRY;
+
+  // ── HEADER ──────────────────────────────────────────────────────────────
+  var firstName = d.fn ? d.fn.trim() : 'Your';
+  $id('r-name').textContent   = firstName;
+  $id('r-detail').textContent = 'Age ' + d.age + (d.dep > 0 ? ' · ' + d.dep + ' dependant' + (d.dep > 1 ? 's' : '') : '');
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var now = new Date();
+  $id('r-date').textContent = months[now.getMonth()] + ' ' + now.getFullYear();
+
+  // ── SECTION 1 ────────────────────────────────────────────────────────────
+  $id('r-ne').textContent  = fmtCurrency(d.ne);
+  $id('r-po').textContent  = d.po;
+  $id('r-nr').textContent  = fmtCurrencyFull(d.nr);
+  $id('r-ac').textContent  = fmtCurrency(d.ac);
+  $id('r-hi').textContent  = fmtCurrencyFull(d.hi);
+  $id('r-rp').textContent  = fmtPct(d.rp);
+  $id('r-tmi').textContent = fmtCurrencyFull(target_monthly);
+  $id('r-ta').textContent  = d.ta;
+  $id('r-years-away').textContent = years_to_target + ' years from today';
+
+  // ── SECTION 2 ────────────────────────────────────────────────────────────
+  $id('d-ne-today').textContent   = fmtCurrency(d.ne);
+  $id('d-time-today').textContent = 'Age ' + current_arrival_age;
+  $id('d-acq-today').textContent  = d.po;
+  $id('d-inc-today').textContent  = fmtPct(inc_rep_current);
+
+  $id('d-ne-gap').textContent   = fmtCurrency(equity_gap);
+  $id('d-time-gap').textContent = time_gap > 0 ? time_gap + ' year' + (time_gap !== 1 ? 's' : '') + ' late' : 'On track';
+  $id('d-acq-gap').textContent  = acq_gap_low === 0 ? 'None' : acq_gap_low + ' to ' + acq_gap_high + ' more';
+  $id('d-inc-gap').textContent  = fmtPct(inc_rep_gap);
+
+  $id('d-ne-goal').textContent    = fmtCurrency(required_equity);
+  $id('d-time-goal').textContent  = 'Age ' + d.ta;
+  $id('d-acq-goal').textContent   = total_low + ' to ' + total_high;
+  $id('d-inc-goal').textContent   = fmtPct(d.rp);
+  $id('d-inc-goal-sub').textContent = fmtCurrencyFull(target_monthly) + '/month';
+
+  // Progress bar
+  $id('prog-fill').style.width = progress_pct.toFixed(1) + '%';
+  $id('prog-start').textContent = fmtCurrency(d.ne) + ' today';
+  $id('prog-mid').textContent   = fmtCurrency(required_equity / 2) + ' midpoint';
+  $id('prog-end').textContent   = fmtCurrency(required_equity) + ' goal';
+  $id('prog-pct').textContent   = progress_pct.toFixed(1) + '% of the equity journey complete';
+
+  // ── SECTION 3 ────────────────────────────────────────────────────────────
+
+  // Card 1
+  $id('i-need-yr').textContent  = fmtCurrencyFull(equity_needed_per_yr);
+  $id('i-curr-yr').textContent  = fmtCurrencyFull(current_equity_pace);
+  $id('i-curr-bar').style.width = curr_bar_pct.toFixed(1) + '%';
+  $id('i-shortfall').textContent = fmtCurrencyFull(equity_shortfall_yr);
+
+  // Card 2
+  $id('i-tgt-inc').textContent  = fmtCurrencyFull(target_monthly) + '/mo';
+  $id('i-curr-inc').textContent = fmtCurrencyFull(d.nr) + '/mo';
+  $id('i-per-prop').textContent = income_per_prop > 0 ? '~' + fmtCurrencyFull(income_per_prop) + '/mo' : 'N/A';
+
+  // Card 3
+  var badgeEl = $id('i-ready-badge');
+  if (is_ready) {
+    badgeEl.innerHTML = '<span class="sbadge-ok">Ready</span>';
+  } else {
+    badgeEl.innerHTML = '<span class="sbadge-nr">Not ready yet</span>';
+  }
+  $id('i-cap-avail').textContent = fmtCurrencyFull(d.ac);
+  $id('i-cap-req').textContent   = fmtCurrencyFull(deposit_req);
+
+  var shortfallRow = $id('i-shortfall-row');
+  if (is_ready) {
+    shortfallRow.innerHTML = '<div class="rrow-cap"><div class="rrow-l">Capital surplus</div><div class="rrow-v-grn">' + fmtCurrencyFull(d.ac - deposit_req) + '</div></div>';
+  } else {
+    shortfallRow.innerHTML = '<div class="rrow-sfl"><div class="rrow-l">Capital shortfall</div><div class="rrow-v-rd">' + fmtCurrencyFull(capital_shortfall) + '</div></div>';
+  }
+
+  $id('i-cap-fill').style.width = cap_pct.toFixed(1) + '%';
+  $id('i-cap-lbl-s').textContent = fmtCurrency(d.ac) + ' available';
+  $id('i-cap-lbl-e').textContent = fmtCurrency(deposit_req) + ' needed';
+
+  // ── COST OF DELAY ────────────────────────────────────────────────────────
+  $id('cod-price-now').textContent  = fmtCurrencyFull(ASSUMED_ENTRY);
+  $id('cod-price-wait').innerHTML   = fmtCurrencyFull(entry_wait) + '<span class="td-s">+' + fmtCurrencyFull(entry_delta) + ' to entry</span>';
+  $id('cod-dep-now').textContent    = fmtCurrencyFull(dep_now);
+  $id('cod-dep-wait').innerHTML     = fmtCurrencyFull(dep_wait) + '<span class="td-s">+' + fmtCurrencyFull(dep_delta) + ' more cash needed</span>';
+  $id('cod-age-now').textContent    = 'Age ' + current_arrival_age;
+  $id('cod-age-wait').innerHTML     = 'Age ' + age_wait + '<span class="td-s">2 fewer years of financial freedom</span>';
+  $id('cod-foregone').innerHTML     = '~' + fmtCurrencyFull(foregone_equity) + '<span class="td-s">Compounding from day one</span>';
+
+})();
+</script>
+
+</body>
+</html>
+l>
