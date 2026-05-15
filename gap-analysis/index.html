@@ -173,13 +173,39 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 680px) {
     .rp { margin: 0; border: none; }
-    .rp-header, .sec, .dly-sec, .q-sec, .rp-footer, .cta-strip { padding-left: 20px; padding-right: 20px; }
-    .input-grid, .dim-wrap, .prog-sec, .ins-grid { margin-left: 20px; margin-right: 20px; }
+    .rp-header, .sec, .dly-sec, .q-sec, .rp-footer, .cta-strip { padding-left: 16px; padding-right: 16px; }
+    .input-grid, .dim-wrap, .prog-sec, .ins-grid { margin-left: 16px; margin-right: 16px; }
     .input-grid { grid-template-columns: 1fr 1fr; }
     .ins-grid { grid-template-columns: 1fr; }
     .qgrid { grid-template-columns: 1fr; }
-    table.dim { font-size: 11px; }
     .cta-strip { flex-direction: column; align-items: flex-start; gap: 16px; }
+    /* Gap table — allow horizontal scroll rather than clipping */
+    .dim-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table.dim { font-size: 10px; min-width: 420px; }
+    table.dim thead th { padding: 8px 8px; letter-spacing: 0.8px; }
+    table.dim thead th:first-child { width: 60px; }
+    td.rl { padding: 10px 8px; width: 60px; font-size: 8px; letter-spacing: 0.8px; }
+    td.dc { padding: 10px 8px; }
+    .vt, .vg, .vgo { font-size: 14px; }
+    .csub { font-size: 9px; }
+    /* Cost-of-delay table — allow horizontal scroll */
+    .dly-sec { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .dtbl { min-width: 380px; font-size: 10px; }
+    .dtbl thead th { padding: 7px 10px; }
+    .dtbl tbody td { padding: 8px 10px; font-size: 10px; }
+    /* Header — stack on very small screens */
+    .rp-header { flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px; }
+    .rp-header-right { text-align: left; }
+    /* Input grid values */
+    .ic-val { font-size: 15px; }
+    .sec-title { font-size: 18px; }
+  }
+
+  @media (max-width: 400px) {
+    .rp-header, .sec, .dly-sec, .q-sec, .rp-footer, .cta-strip { padding-left: 12px; padding-right: 12px; }
+    .input-grid, .dim-wrap, .prog-sec, .ins-grid { margin-left: 12px; margin-right: 12px; }
+    .ic-val { font-size: 13px; }
+    .ic-label { font-size: 8px; }
   }
 </style>
 </head>
