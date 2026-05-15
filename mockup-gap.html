@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1000">
+<title>Gap Table Callout</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0f1926;
+    width: 1000px;
+    height: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .frame {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    width: 900px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+  }
+  /* Section header */
+  .sh { background: #205375; padding: 18px 28px; display: flex; align-items: baseline; gap: 14px; }
+  .sh-tag { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #a8c4d8; }
+  .sh-title { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
+  .sh-sub { font-size: 11px; color: #8ab4ce; margin-left: auto; }
+  /* Table */
+  .dim-wrap { overflow: hidden; }
+  table.dim { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  table.dim thead th { background: #1a4060; padding: 12px 16px; text-align: left; border-right: 1px solid rgba(255,255,255,0.12); font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #a8c4d8; }
+  table.dim thead th:first-child { width: 90px; background: #132e45; }
+  td.rl { padding: 16px 16px; font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; border-right: 1px solid #dde2ea; width: 90px; vertical-align: middle; }
+  td.dc { padding: 16px 16px; border-right: 1px solid #dde2ea; vertical-align: top; }
+  td.dc:last-child { border-right: none; }
+  .csub { font-size: 10px; color: #9ca3af; margin-top: 3px; }
+  tr.rt td { background: #fff; border-bottom: 1px solid #dde2ea; }
+  tr.rt td.rl { color: #374151; background: #f8fafc; }
+  .vt { font-size: 20px; font-weight: 800; color: #1e3a5f; line-height: 1; }
+  tr.rg td { background: #fffbf0; border-bottom: 1px solid #dde2ea; }
+  tr.rg td.rl { color: #b45309; background: #fff8e6; }
+  .vg { font-size: 20px; font-weight: 800; color: #b45309; line-height: 1; }
+  tr.rgo td { background: #f0fdf8; }
+  tr.rgo td.rl { color: #0d7c5f; background: #e6faf4; }
+  .vgo { font-size: 20px; font-weight: 800; color: #0d7c5f; line-height: 1; }
+  /* Label strip */
+  .label-strip { background: #f8f9fb; padding: 10px 28px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #e2e6ed; }
+  .ls-name { font-size: 12px; font-weight: 700; color: #205375; }
+  .ls-detail { font-size: 11px; color: #8a93a8; }
+  .ls-badge { font-size: 10px; font-weight: 700; color: #F66B0E; background: rgba(246,107,14,0.1); border: 1px solid rgba(246,107,14,0.25); padding: 3px 10px; border-radius: 100px; }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="sh">
+    <span class="sh-tag">Section 2 of 4 —</span>
+    <span class="sh-title">The Gap</span>
+    <span class="sh-sub">Sarah Mitchell · 42 yrs · 1 property · $420k equity</span>
+  </div>
+  <div class="dim-wrap">
+    <table class="dim">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Equity gap</th>
+          <th>Time to destination</th>
+          <th>Acquisitions required</th>
+          <th>Income replacement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="rt">
+          <td class="rl">Today</td>
+          <td class="dc"><div class="vt">$420,000</div><div class="csub">Net equity held</div></td>
+          <td class="dc"><div class="vt">42 yrs old</div><div class="csub">Current age</div></td>
+          <td class="dc"><div class="vt">1</div><div class="csub">Properties owned</div></td>
+          <td class="dc"><div class="vt">$2,200</div><div class="csub">Per month</div></td>
+        </tr>
+        <tr class="rg">
+          <td class="rl">Gap</td>
+          <td class="dc"><div class="vg">$1,480,000</div><div class="csub">Still to build</div></td>
+          <td class="dc"><div class="vg">4 yrs behind</div><div class="csub">At current pace</div></td>
+          <td class="dc"><div class="vg">3 more</div><div class="csub">To reach goal</div></td>
+          <td class="dc"><div class="vg">$5,800/mo</div><div class="csub">Monthly shortfall</div></td>
+        </tr>
+        <tr class="rgo">
+          <td class="rl">Your goal</td>
+          <td class="dc"><div class="vgo">$1,900,000</div><div class="csub">Target portfolio</div></td>
+          <td class="dc"><div class="vgo">Age 55</div><div class="csub">13 years away</div></td>
+          <td class="dc"><div class="vgo">4 total</div><div class="csub">Properties needed</div></td>
+          <td class="dc"><div class="vgo">$8,000/mo</div><div class="csub">Target per month</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="label-strip">
+    <span class="ls-name">Property Portfolio Gap Analysis</span>
+    <span class="ls-detail">pbco.com.au — personalised to your numbers</span>
+    <span class="ls-badge">Free · 5 minutes</span>
+  </div>
+</div>
+</body>
+</html>

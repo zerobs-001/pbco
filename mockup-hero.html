@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1400">
+<title>Hero Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0f1926;
+    width: 1400px;
+    height: 880px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .scene {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    padding: 0 80px;
+  }
+
+  /* LEFT: headline copy */
+  .left {
+    flex-shrink: 0;
+    width: 360px;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #F66B0E;
+    margin-bottom: 18px;
+  }
+  .headline {
+    font-size: 38px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -0.8px;
+    margin-bottom: 20px;
+  }
+  .headline span { color: #F66B0E; }
+  .sub {
+    font-size: 15px;
+    color: #8fa8c0;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(246,107,14,0.15);
+    border: 1px solid rgba(246,107,14,0.35);
+    border-radius: 100px;
+    padding: 8px 16px;
+    color: #F66B0E;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .pill::before { content: "✓"; font-size: 13px; }
+
+  /* RIGHT: laptop */
+  .laptop-wrap {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .laptop-screen {
+    width: 780px;
+    height: 490px;
+    background: #1a2540;
+    border-radius: 16px 16px 4px 4px;
+    border: 3px solid #3a4a60;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+  }
+  /* screen glare */
+  .laptop-screen::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    z-index: 10;
+    border-radius: 16px 16px 0 0;
+  }
+  .camera-notch {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: #2a3a50;
+    border-radius: 50%;
+    z-index: 11;
+    border: 1px solid #3a4a60;
+  }
+
+  /* Report rendered inside screen */
+  .screen-content {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+  }
+
+  .laptop-base {
+    width: 840px;
+    height: 28px;
+    background: linear-gradient(180deg, #2a3a50 0%, #1e2d42 100%);
+    border-radius: 0 0 8px 8px;
+    border: 1px solid #3a4a60;
+    border-top: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  }
+  .trackpad {
+    width: 120px;
+    height: 16px;
+    background: #263548;
+    border-radius: 4px;
+    border: 1px solid #3a4a60;
+  }
+
+  /* ── MINI REPORT CSS (scaled via transform) ── */
+  .report-scale {
+    transform: scale(0.605);
+    transform-origin: top left;
+    width: 1289px; /* 780 / 0.605 */
+    position: absolute;
+    top: 0; left: 0;
+  }
+
+  .rp { background: #fff; }
+  .rp-header { background: #205375; padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .rp-logo-text .brand { font-size: 13px; font-weight: 800; color: #fff; font-family: 'Inter', sans-serif; }
+  .rp-logo-text .domain { font-size: 9px; color: #a8c4d8; margin-top: 1px; font-family: 'Inter', sans-serif; }
+  .rp-report-name { font-size: 8px; font-weight: 700; color: #a8c4d8; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 6px; font-family: 'Inter', sans-serif; }
+  .rp-client-name { font-size: 14px; font-weight: 700; color: #fff; font-family: 'Inter', sans-serif; text-align: right; }
+  .rp-client-detail { font-size: 10px; color: #a8c4d8; margin-top: 2px; font-family: 'Inter', sans-serif; }
+
+  .sec { padding: 22px 32px 0; }
+  .sec-tag { font-size: 8px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #8a93a8; margin-bottom: 4px; font-family: 'Inter', sans-serif; }
+  .sec-title { font-size: 19px; font-weight: 800; color: #205375; letter-spacing: -0.3px; font-family: 'Inter', sans-serif; }
+  .sec-body { font-size: 11px; color: #4a5266; margin-top: 6px; line-height: 1.65; font-family: 'Inter', sans-serif; }
+
+  .input-grid { margin: 14px 32px 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #e2e6ed; border: 1px solid #e2e6ed; }
+  .ic { background: #f8fafc; padding: 12px; }
+  .ic.anc { background: #eef4fb; }
+  .ic.der { background: #e6faf4; }
+  .ic-label { font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #8a93a8; margin-bottom: 4px; font-family: 'Inter', sans-serif; }
+  .ic-val { font-size: 17px; font-weight: 800; color: #205375; line-height: 1; font-family: 'Inter', sans-serif; }
+  .ic-val.grn { color: #0d7c5f; }
+  .ic-sub { font-size: 9px; color: #6b7280; margin-top: 2px; font-family: 'Inter', sans-serif; }
+
+  .dim-wrap { margin: 14px 32px 0; border: 1px solid #dde2ea; overflow: hidden; }
+  table.dim { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  table.dim thead th { background: #205375; padding: 10px 12px; text-align: left; border-right: 1px solid rgba(255,255,255,0.12); font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #a8c4d8; font-family: 'Inter', sans-serif; }
+  table.dim thead th:first-child { width: 70px; background: #163d57; }
+  td.rl { padding: 11px 12px; font-size: 8px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; border-right: 1px solid #dde2ea; width: 70px; vertical-align: middle; font-family: 'Inter', sans-serif; }
+  td.dc { padding: 11px 12px; border-right: 1px solid #dde2ea; vertical-align: top; font-family: 'Inter', sans-serif; }
+  td.dc:last-child { border-right: none; }
+  .csub { font-size: 9px; color: #9ca3af; margin-top: 2px; font-family: 'Inter', sans-serif; }
+  tr.rt td { background: #fff; border-bottom: 1px solid #dde2ea; }
+  tr.rt td.rl { color: #374151; background: #f8fafc; }
+  .vt { font-size: 17px; font-weight: 800; color: #1e3a5f; line-height: 1; font-family: 'Inter', sans-serif; }
+  tr.rg td { background: #fffbf0; border-bottom: 1px solid #dde2ea; }
+  tr.rg td.rl { color: #b45309; background: #fff8e6; }
+  .vg { font-size: 17px; font-weight: 800; color: #b45309; line-height: 1; font-family: 'Inter', sans-serif; }
+  tr.rgo td { background: #f0fdf8; }
+  tr.rgo td.rl { color: #0d7c5f; background: #e6faf4; }
+  .vgo { font-size: 17px; font-weight: 800; color: #0d7c5f; line-height: 1; font-family: 'Inter', sans-serif; }
+</style>
+</head>
+<body>
+<div class="scene">
+  <!-- LEFT COPY -->
+  <div class="left">
+    <div class="eyebrow">Free personalised report</div>
+    <div class="headline">Find out exactly <span>what's missing</span> from your portfolio</div>
+    <div class="sub">Enter your current equity position and income target. Get a personalised report showing your gap — and how long you have to close it.</div>
+    <div class="pill">Takes 5 minutes</div>
+  </div>
+
+  <!-- LAPTOP -->
+  <div class="laptop-wrap">
+    <div class="laptop-screen">
+      <div class="camera-notch"></div>
+      <div class="screen-content">
+        <div class="report-scale">
+          <div class="rp">
+            <!-- Header -->
+            <div class="rp-header">
+              <div>
+                <div class="rp-logo-text">
+                  <div class="brand">Property Buyers Co.</div>
+                  <div class="domain">pbco.com.au</div>
+                </div>
+                <div class="rp-report-name">Property Portfolio Gap Analysis</div>
+              </div>
+              <div>
+                <div class="rp-client-name">Sarah Mitchell</div>
+                <div class="rp-client-detail">42 years old · 1 investment property</div>
+              </div>
+            </div>
+
+            <!-- Section 1 -->
+            <div class="sec">
+              <div class="sec-tag">Section 1 of 4</div>
+              <div class="sec-title">What you told us</div>
+              <div class="sec-body">Your current position and income target — used to calculate your gap.</div>
+            </div>
+            <div class="input-grid">
+              <div class="ic anc"><div class="ic-label">Net equity</div><div class="ic-val">$420K</div><div class="ic-sub">Across portfolio</div></div>
+              <div class="ic anc"><div class="ic-label">Properties</div><div class="ic-val">1</div><div class="ic-sub">Investment</div></div>
+              <div class="ic anc"><div class="ic-label">Rental income</div><div class="ic-val">$2,200</div><div class="ic-sub">Per month</div></div>
+              <div class="ic anc"><div class="ic-label">Age</div><div class="ic-val">42</div><div class="ic-sub">Current</div></div>
+              <div class="ic der"><div class="ic-label">Target income</div><div class="ic-val grn">$8,000</div><div class="ic-sub">Per month</div></div>
+              <div class="ic der"><div class="ic-label">Target age</div><div class="ic-val grn">55</div><div class="ic-sub">13 yrs away</div></div>
+              <div class="ic der"><div class="ic-label">Replacement</div><div class="ic-val grn">100%</div><div class="ic-sub">Of income</div></div>
+              <div class="ic"><div class="ic-label">Avg. property</div><div class="ic-val">$680K</div><div class="ic-sub">Entry price</div></div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="sec" style="margin-top:6px;">
+              <div class="sec-tag">Section 2 of 4</div>
+              <div class="sec-title">The gap</div>
+            </div>
+            <div class="dim-wrap">
+              <table class="dim">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Equity gap</th>
+                    <th>Time to destination</th>
+                    <th>Acquisitions required</th>
+                    <th>Income replacement</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="rt">
+                    <td class="rl">Today</td>
+                    <td class="dc"><div class="vt">$420,000</div><div class="csub">Net equity held</div></td>
+                    <td class="dc"><div class="vt">42 yrs old</div><div class="csub">Current age</div></td>
+                    <td class="dc"><div class="vt">1</div><div class="csub">Properties owned</div></td>
+                    <td class="dc"><div class="vt">$2,200</div><div class="csub">Per month</div></td>
+                  </tr>
+                  <tr class="rg">
+                    <td class="rl">Gap</td>
+                    <td class="dc"><div class="vg">$1,480,000</div><div class="csub">Still to build</div></td>
+                    <td class="dc"><div class="vg">4 yrs behind</div><div class="csub">At current pace</div></td>
+                    <td class="dc"><div class="vg">3 more</div><div class="csub">To reach goal</div></td>
+                    <td class="dc"><div class="vg">$5,800</div><div class="csub">Monthly shortfall</div></td>
+                  </tr>
+                  <tr class="rgo">
+                    <td class="rl">Your goal</td>
+                    <td class="dc"><div class="vgo">$1,900,000</div><div class="csub">Target portfolio</div></td>
+                    <td class="dc"><div class="vgo">Age 55</div><div class="csub">13 years away</div></td>
+                    <td class="dc"><div class="vgo">4 total</div><div class="csub">Properties needed</div></td>
+                    <td class="dc"><div class="vgo">$8,000</div><div class="csub">Target per month</div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="laptop-base">
+      <div class="trackpad"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

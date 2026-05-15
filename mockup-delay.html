@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1000">
+<title>Cost of Delay Callout</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0f1926;
+    width: 1000px;
+    height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .frame {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    width: 900px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+  }
+  /* Header */
+  .sh { background: #1e2d42; padding: 18px 28px; display: flex; align-items: baseline; gap: 14px; }
+  .sh-tag { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #6a8fa8; }
+  .sh-title { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
+  /* Table */
+  .dtbl { width: 100%; border-collapse: collapse; }
+  .dtbl thead th { padding: 11px 18px; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-align: left; }
+  .th-m { background: #f0f2f5; color: #6b7280; width: 36%; }
+  .th-n { background: #deeaf7; color: #205375; width: 32%; }
+  .th-d { background: #fff0f0; color: #b91c1c; width: 32%; }
+  /* column badges */
+  .th-n .badge-now { display: inline-block; background: #205375; color: #fff; font-size: 8px; font-weight: 700; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 3px; margin-left: 6px; vertical-align: middle; }
+  .th-d .badge-wait { display: inline-block; background: #b91c1c; color: #fff; font-size: 8px; font-weight: 700; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 3px; margin-left: 6px; vertical-align: middle; }
+  .dtbl tbody td { padding: 13px 18px; font-size: 13px; border-top: 1px solid #e2e6ed; vertical-align: top; }
+  .dtbl tbody tr:nth-child(even) td { background: #fafbfc; }
+  .td-m { color: #374151; font-weight: 500; font-size: 12px; }
+  .td-n { color: #205375; font-weight: 700; }
+  .td-d { color: #b91c1c; font-weight: 700; }
+  .td-s { font-size: 10px; color: #9ca3af; font-weight: 400; display: block; margin-top: 2px; }
+  /* delta badge */
+  .delta { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 100px; margin-left: 6px; vertical-align: middle; }
+  .delta.red { background: #fff0f0; color: #b91c1c; border: 1px solid #fca5a5; }
+  /* footer */
+  .footer { background: #f8f9fb; padding: 12px 28px; border-top: 1px solid #e2e6ed; display: flex; justify-content: space-between; align-items: center; }
+  .footer-note { font-size: 10px; color: #9ca3af; }
+  .footer-label { font-size: 11px; font-weight: 700; color: #205375; }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="sh">
+    <span class="sh-tag">Section 4 of 4 —</span>
+    <span class="sh-title">Cost of delay</span>
+  </div>
+  <table class="dtbl">
+    <thead>
+      <tr>
+        <th class="th-m">Metric</th>
+        <th class="th-n">Act now <span class="badge-now">2026</span></th>
+        <th class="th-d">Wait 24 months <span class="badge-wait">2028</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-m">Median entry price</td>
+        <td class="td-n">$685,000</td>
+        <td class="td-d">$769,000 <span class="delta red">+$84k</span><span class="td-s">Est. at 6% p.a. growth</span></td>
+      </tr>
+      <tr>
+        <td class="td-m">Deposit required (20%)</td>
+        <td class="td-n">$137,000</td>
+        <td class="td-d">$153,800 <span class="delta red">+$16.8k</span></td>
+      </tr>
+      <tr>
+        <td class="td-m">Projected equity in 10 yrs</td>
+        <td class="td-n">$1,240,000<span class="td-s">From next purchase</span></td>
+        <td class="td-d">$1,119,000 <span class="delta red">−$121k</span><span class="td-s">2 fewer compounding years</span></td>
+      </tr>
+      <tr>
+        <td class="td-m">Income shortfall at age 55</td>
+        <td class="td-n">$5,800/mo</td>
+        <td class="td-d">$6,900/mo <span class="delta red">−$1,100</span><span class="td-s">One fewer property by target date</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="footer">
+    <span class="footer-note">Indicative only — based on 6% p.a. growth assumption. Not financial advice.</span>
+    <span class="footer-label">Property Portfolio Gap Analysis — pbco.com.au</span>
+  </div>
+</div>
+</body>
+</html>
